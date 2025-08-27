@@ -20,28 +20,28 @@ export class UserController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createUserDto: CreateUserDto): User {
+  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.userService.create(createUserDto);
   }
 
   @Get()
-  findAll(): User[] {
+  async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): User {
-    return this.userService.findOne(+id);
+  async findOne(@Param('id') id: string): Promise<User> {
+    return this.userService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): User {
-    return this.userService.update(+id, updateUserDto);
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: string): void {
-    return this.userService.remove(+id);
+  async remove(@Param('id') id: string): Promise<void> {
+    return this.userService.remove(id);
   }
 }
